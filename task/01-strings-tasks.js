@@ -101,7 +101,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    return value.toString().trim();
 }
 
 /**
@@ -116,7 +116,12 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+    var result = '';
+    for(var i=0;i < count; i++)
+    {
+        result+=value;
+    }
+    return result;
 }
 
 /**
@@ -132,7 +137,12 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    var begin = '';
+    var end = '';
+    begin = str.substring(0,str.indexOf(value));
+    end = str.substring(str.indexOf(value)+value.length,str.length);
+    return begin+end;
+    // return str.substr(str.indexOf(value),str.indexOf(value) + value.length);
 }
 
 /**
@@ -147,7 +157,9 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    str.indexOf('<');
+    str.lastIndexOf('>');
+    return str.substring(str.indexOf('<')+1,str.lastIndexOf('>'));
 }
 
 
@@ -162,7 +174,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    return str.toUpperCase();
 }
 
 /**
@@ -176,7 +188,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
 }
 
 /**
@@ -203,8 +215,16 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
-}
+    var firstString = '┌' + '─'.repeat(width-2) + '┐\n';
+    var lastString = '└' + '─'.repeat(width-2) + '┘\n';
+    var body = ''
+    for(var i=2;i<height;i++)
+    {
+        body+= '│' + ' '.repeat(width-2) + '│\n';
+    }
+    return firstString + body + lastString
+
+    }
 
 
 /**
@@ -223,7 +243,20 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    var encodedString = '';
+    for(var i =0;i<str.length;i++)
+    {
+        var curSym = str.charCodeAt(i);
+        if((curSym>64 && curSym<78)||(curSym>96 && curSym<110))
+        encodedString+= String.fromCharCode(str.charCodeAt(i)+13);
+
+        if((curSym>77 && curSym<97)||(curSym>109 && curSym<123))
+        encodedString+= String.fromCharCode(str.charCodeAt(i)-13)
+        
+        if(curSym<64 || curSym>123)
+        encodedString+= String.fromCharCode(str.charCodeAt(i));            
+    }
+    return encodedString;
 }
 
 /**
@@ -240,7 +273,10 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    var b = value instanceof String 
+    var a = typeof(value) == 'string';
+    var c = a || b;
+    return c;
 }
 
 
