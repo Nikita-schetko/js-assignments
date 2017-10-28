@@ -89,7 +89,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    throw new Error('Not implemented');
+    var root = b/a * (-1)
+    return root; 
 }
 
 
@@ -111,7 +112,9 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    var a = (x1*x2 + y1*y2)
+    var b = (Math.sqrt(x1*x1+y1*y1))*(Math.sqrt(x2*x2+y2*y2))
+    return Math.acos(a/b) 
 }
 
 /**
@@ -127,7 +130,8 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    throw new Error('Not implemented');
+    var a = value.toString();
+    return parseInt(a.charAt(a.length-1));
 }
 
 
@@ -143,7 +147,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    throw new Error('Not implemented');
+    return parseFloat(value)
 }
 
 /**
@@ -160,7 +164,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a,b,c) {
-    throw new Error('Not implemented');
+   return Math.sqrt(a*a+b*b+c*c)
 }
 
 /**
@@ -181,7 +185,9 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    throw new Error('Not implemented');
+    var a = Math.pow(10,pow);
+    return Math.round(num/a)*a
+
 }
 
 /**
@@ -202,7 +208,14 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    throw new Error('Not implemented');
+    for(var i=2;i < n; i++)
+    {
+        if(n % i == 0)
+        {
+            return false
+        }
+    }
+    return true
 }
 
 /**
@@ -221,7 +234,14 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+    
+    var a = parseInt(value);
+    if(isNaN(a))
+    {
+        return def
+    }
+    else 
+        return a
 }
 
 module.exports = {
