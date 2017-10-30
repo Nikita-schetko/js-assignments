@@ -723,24 +723,22 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-    // arr = [ 1, 2, 3, 4, 5, 6, 7, 8 ] ;
-    // arr.map(function (value, index, arrr) {
-    //     var buff = 0;
-    //     if (index < arr.length / 2) {
-    //         buff = arrr[Math.celi(arr.length/2)]
-    //         arr[Math.celi(arr.length/2)] = value;
-    //         value = buff;
-    //         return value
-    //     }
-    //     // if (index == arr.length / 2) {
-    //     //     return value
-    //     // }
-    //     if (index > arr.length / 2) {
-    //         return value
-    //     }
-    // })
-    // return arr
-    throw new Error('Not implemented');
+    //CHECK SOLUTION
+    if(arr.length == 1)
+    {
+        return arr
+    }
+    var b = arr.map(function (value, index, arrr) {
+        var buff = 0;
+        if (index < Math.floor(arr.length / 2)) { 
+            var tmp = Math.ceil(arr.length/2)+index;
+            buff = arr[tmp]
+            arr[Math.ceil(arr.length/2)+index] = value;
+            return buff
+        }
+        return value
+    })
+     return b
     
 }
 
