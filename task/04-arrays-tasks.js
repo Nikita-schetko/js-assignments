@@ -566,7 +566,15 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+    // CHECK SOLUTION HERE
+    var Arr = new Array(end+1 - start) ;
+    Arr.fill(start)
+    Arr.reduce(function(acc,current,index)
+        {
+            Arr[index] = Arr[index] + acc;
+            return acc+1
+        },0)
+    return Arr;
 }
 
 /**
@@ -581,7 +589,15 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+    var uniqueArr = [];
+    arr.map(function (value, index) {
+        if (!uniqueArr.some(function (element) {
+            return element == arr[index]
+        }))
+            uniqueArr.push(arr[index]);
+    })
+
+    return uniqueArr
 }
 
 /**
@@ -615,7 +631,18 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+    var multimap = new Map();
+    array.map(function(value,index){
+        var currentKey = keySelector(value);
+        if(multimap.has(currentKey))
+        {
+           var mapValues = multimap.get(currentKey);
+           mapValues.push(valueSelector(value));
+           return multimap.set(currentKey,mapValues)     
+        }
+        return multimap.set(keySelector(value),[valueSelector(value)])
+    })
+    return multimap
 }
 
 
@@ -631,7 +658,13 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+    //CHECK SOLUTION HERE;
+    var arrResult = [];
+    arr.map(function(value,index)
+        {
+            Array.prototype.push.apply(arrResult, childrenSelector(value));            
+        })
+        return arrResult
 }
 
 
@@ -648,7 +681,26 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+    // I BELIVE THAT IS NOT THE BEST SOLUTION FOR THIS PROBLEM!;
+    // CHECK SOLUTION
+
+    function recursiveSearch(arr, indexArray, currentIndex) {
+        if (indexArray.length == currentIndex) {
+            return arr
+        }
+        else {
+            arr = arr.reduce(function (prev, current, index, arrrr) {
+                if ((index) > indexes[currentIndex]) {
+                    return prev;
+                }
+                return current
+            },arr[0]);
+            return recursiveSearch(arr, indexArray, currentIndex + 1)
+        }
+    }
+
+    var a = recursiveSearch(arr, indexes, 0);
+    return a;
 }
 
 
@@ -671,7 +723,25 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
+    // arr = [ 1, 2, 3, 4, 5, 6, 7, 8 ] ;
+    // arr.map(function (value, index, arrr) {
+    //     var buff = 0;
+    //     if (index < arr.length / 2) {
+    //         buff = arrr[Math.celi(arr.length/2)]
+    //         arr[Math.celi(arr.length/2)] = value;
+    //         value = buff;
+    //         return value
+    //     }
+    //     // if (index == arr.length / 2) {
+    //     //     return value
+    //     // }
+    //     if (index > arr.length / 2) {
+    //         return value
+    //     }
+    // })
+    // return arr
     throw new Error('Not implemented');
+    
 }
 
 
