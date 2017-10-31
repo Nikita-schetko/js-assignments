@@ -30,7 +30,16 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    switch (true) {
+        case (num % 3 == 0) && (num % 5 == 0):
+            return 'FizzBuzz'
+        case (num % 5 == 0):
+            return 'Buzz'
+        case (num % 3 == 0):
+            return 'Fizz'
+        default:
+            return num
+    }
 }
 
 
@@ -46,7 +55,12 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    var factorial = 1;
+    for(var i =1;i<=n;i++)
+    {
+        factorial = factorial * i;
+    }
+    return factorial
 }
 
 
@@ -63,7 +77,10 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    for (var i = n1; i < n2; i++) {
+        n1 = n1 + i + 1;
+    }
+    return n1;
 }
 
 
@@ -82,7 +99,9 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    if ((a < b+c)&&(b < a+c)&&(c < a+b))
+    return true;
+    else return false;
 }
 
 
@@ -118,8 +137,15 @@ function isTriangle(a,b,c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *  
  */
-function doRectanglesOverlap(rect1, rect2) {
+function doRectanglesOverlap(r1, r2) {
     throw new Error('Not implemented');
+    
+        r1.right = r1.left + r1.width;
+        r1.bottom = r1.top - r1.height;        
+        r2.right = r2.left + r2.width;
+        r2.bottom = r2.top - r2.height;        
+        
+        return (r2.left > r1.right || r2.right < r1.left ||r2.top > r1.bottom || r2.bottom < r1.top);
 }
 
 
@@ -150,7 +176,10 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    var r = circle.radius;
+    if ((Math.pow((point.x - circle.center.x),2) + Math.pow((point.y - circle.center.y),2) < r * r))
+        return true
+    else return false
 }
 
 
@@ -166,7 +195,19 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    for(var i = 0;i < str.length;i++)
+    {
+       var char = str.charAt(i);
+       var curCharIndex = i;
+        for (var j = 0; j<str.length;j++)
+        {
+            if(curCharIndex == j)
+            continue;
+            if(char == str.charAt[j])
+            return true
+        }
+    }
+    return false
 }
 
 
