@@ -203,11 +203,13 @@ function findFirstSingleChar(str) {
         {
             if(curCharIndex == j)
             continue;
-            if(char == str.charAt[j])
-            return true
+            if(char == str.charAt(j))
+            break;
+            if(j == str.length-1)
+            return char
         }
     }
-    return false
+    return null
 }
 
 
@@ -233,7 +235,11 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    var result = '';
+    isStartIncluded ? result = '[' : result = '(';
+    a <= b ? result+=(a+', '+b) : result+=(b+', '+a);
+    isEndIncluded ? result+=']' : result+= ')';
+    return result
 }
 
 
@@ -250,7 +256,10 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    var arrayString = str.split('');
+    arrayString.reverse();
+    var a = arrayString.join('');
+    return a;    
 }
 
 
@@ -267,7 +276,11 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    // KEKE, i think that's good idea not to use loops here :)
+    var arrayString = num.toString().split('');
+    arrayString.reverse();
+    var a = arrayString.join('');
+    return a; 
 }
 
 
