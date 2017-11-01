@@ -305,7 +305,32 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    var ccnLen = ccn.toString().length;
+    var controlSum = 0;
+
+    for(let i = ccnLen-2; i > -1;i-=2)
+    {
+        let curNum = parseInt(ccn.toString().charAt(i));
+        if(curNum*2 > 9)
+        {
+            controlSum+= curNum*2 - 9;
+        }
+        else
+        {
+            controlSum+= curNum*2;
+        }
+    }
+    for(let i = ccnLen-3; i > -1;i-=2)
+    {
+        controlSum+= parseInt(ccn.toString().charAt(i));
+    }
+    controlSum = controlSum + parseInt(ccn.toString().charAt(ccnLen-1));
+    
+    if(controlSum % 10 == 0)
+        return true
+    else
+        return false
+
 }
 
 
@@ -324,7 +349,17 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    function getNumSum(value) {
+        var arr = value.toString().split('');
+        return arr.reduce(function (prev, next) {
+            return parseInt(prev) + parseInt(next);
+        }
+        )
+    }
+    while (num > 9) {
+        num = getNumSum(num);
+    }
+    return num;
 }
 
 
@@ -350,7 +385,52 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    //CHECK SOLUTION HERE
+    var bracketsStack = []
+
+    function checkBalance(str)
+    {
+        for(let i = 0;i<str.length;i++)
+        {
+            if(getRightBracket(str.charAt(i)))
+                bracketsStack.push(str.charAt(i));
+            else
+                if(getRightBracket(bracketsStack[bracketsStack.length-1]) == str.charAt(i))
+                    {
+                        bracketsStack.pop();
+                        continue
+                    }
+            
+            if(i==str.length-1)
+            {
+                bracketsStack.push(str.charAt(i));
+            }
+
+        }
+    }
+
+    function getRightBracket(bracketSymb)
+    {
+        switch (bracketSymb) {
+            case '[':
+                return ']';
+            case '{':
+                return '}';
+            case '(':
+                return ')';
+            case '<':
+                return '>';
+            default:
+                return false
+        }
+    }
+
+    checkBalance(str);
+    
+    if (bracketsStack.length == 0)
+        return true
+    else
+        return false;
 }
 
 
