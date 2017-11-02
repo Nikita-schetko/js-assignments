@@ -466,7 +466,29 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    var dateDiff = endDate.getTime() - startDate.getTime();
+    var sec0 = new Date(0,0,0,0,0,0,0).getTime();
+    var sec45 = new Date(0,0,0,0,0,45,0).getTime();
+    var sec90 = new Date(0,0,0,0,0,90,0).getTime();
+    var min45 = new Date(0,0,0,0,45,0,0).getTime();
+    var min90 = new Date(0,0,0,0,90,0,0).getTime();
+    var hour22 = new Date(0,0,0,22,0,0,0).getTime();
+    var hour36 = new Date(0,0,0,36,0,0,0).getTime();
+    var day25 = new Date(0,0,25,0,0,0,0).getTime();
+    var day45 = new Date(0,0,45,0,0,0,0).getTime();
+    var day365 = new Date(0,0,365,0,0,0,0).getTime();
+    var day545 = new Date(0,0,545,0,0,0,0).getTime();
+    
+    var di = sec45 - sec0;
+    //0 to 45 seconds 
+    if(0 < dateDiff < sec45 - sec0 )
+        return 'a few seconds ago'
+    if(sec45 - sec0 < dateDiff < sec90 - sec45)
+        return 'a minute ago'
+    if(sec90 - sec45 < dateDiff < min45 - sec90)
+        {
+             var mins = 
+        }
 }
 
 
