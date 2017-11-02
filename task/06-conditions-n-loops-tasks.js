@@ -467,28 +467,50 @@ function isBracketsBalanced(str) {
  */
 function timespanToHumanString(startDate, endDate) {
     var dateDiff = endDate.getTime() - startDate.getTime();
-    var sec0 = new Date(0,0,0,0,0,0,0).getTime();
-    var sec45 = new Date(0,0,0,0,0,45,0).getTime();
-    var sec90 = new Date(0,0,0,0,0,90,0).getTime();
-    var min45 = new Date(0,0,0,0,45,0,0).getTime();
-    var min90 = new Date(0,0,0,0,90,0,0).getTime();
-    var hour22 = new Date(0,0,0,22,0,0,0).getTime();
-    var hour36 = new Date(0,0,0,36,0,0,0).getTime();
-    var day25 = new Date(0,0,25,0,0,0,0).getTime();
-    var day45 = new Date(0,0,45,0,0,0,0).getTime();
-    var day365 = new Date(0,0,365,0,0,0,0).getTime();
-    var day545 = new Date(0,0,545,0,0,0,0).getTime();
-    
-    var di = sec45 - sec0;
-    //0 to 45 seconds 
-    if(0 < dateDiff < sec45 - sec0 )
+    var sec0 = new Date(0, 0, 0, 0, 0, 0, 0).getTime();
+    var sec45 = new Date(0, 0, 0, 0, 0, 45, 0).getTime();
+    var sec90 = new Date(0, 0, 0, 0, 0, 90, 0).getTime();
+    var min45 = new Date(0, 0, 0, 0, 45, 0, 0).getTime();
+    var min90 = new Date(0, 0, 0, 0, 90, 0, 0).getTime();
+    var hour22 = new Date(0, 0, 0, 22, 0, 0, 0).getTime();
+    var hour36 = new Date(0, 0, 0, 36, 0, 0, 0).getTime();
+    var day25 = new Date(0, 0, 25, 0, 0, 0, 0).getTime();
+    var day45 = new Date(0, 0, 45, 0, 0, 0, 0).getTime();
+    var day345 = new Date(0, 0, 345, 0, 0, 0, 0).getTime();
+    var day545 = new Date(0, 0, 545, 0, 0, 0, 0).getTime();
+
+    if ((0 < dateDiff) && (dateDiff <= sec45 - sec0))
         return 'a few seconds ago'
-    if(sec45 - sec0 < dateDiff < sec90 - sec45)
+    if ((sec45 - sec0 < dateDiff) && (dateDiff <= sec90 - sec0))
         return 'a minute ago'
-    if(sec90 - sec45 < dateDiff < min45 - sec90)
-        {
-             var mins = 
-        }
+    if ((sec90 - sec0 < dateDiff) && (dateDiff <= min45 - sec0)) {
+        let mins = Math.round((dateDiff - 1) / (60 * 1000));
+        return mins + ' minutes ago';
+    }
+    if ((min45 - sec0 < dateDiff) && (dateDiff <= min90 - sec0))
+        return 'an hour ago'
+    if ((min90 - sec0 < dateDiff) && (dateDiff <= hour22 - sec0)) {
+        let hours = Math.round((dateDiff - 1) / (60 * 60 * 1000));
+        return hours + ' hours ago';
+    }
+    if ((hour22 - sec0 < dateDiff) && (dateDiff <= hour36 - sec0))
+        return 'a day ago'
+    if ((hour36 - sec0 < dateDiff) && (dateDiff <= day25 - sec0)) {
+        let days = Math.round((dateDiff - 1) / (24 * 60 * 60 * 1000));
+        return days + ' days ago';
+    }
+    if ((day25 - sec0 < dateDiff) && (dateDiff <= day45 - sec0))
+        return 'a month ago'
+    if ((day45 - sec0 < dateDiff) && (dateDiff <= day345 - sec0)) {
+        let month = Math.round((dateDiff - 1) / (30 * 24 * 60 * 60 * 1000));
+        return month + ' months ago';
+    }
+    if ((day345 - sec0 < dateDiff) && (dateDiff <= day545 - sec0))
+        return 'a year ago'
+    if (day545 - sec0 < dateDiff) {
+        let year = Math.round((dateDiff - 1) / (12 * 30 * 24 * 60 * 60 * 1000));
+        return year + ' years ago';
+    }
 }
 
 
