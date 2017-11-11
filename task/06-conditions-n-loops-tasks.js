@@ -604,7 +604,28 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    //Not sure if this is best implementation
+    var matrixRows = m1.length;
+    var matrixCols = m2[0].length;
+    var resultArr = [];
+    for (var i = 0; i < matrixRows; i++) {
+        resultArr.push([]);
+        for (var j = 0; j < matrixCols; j++) {
+            var matrixValue = getMatrixValue(i,j);
+            resultArr[i].push(matrixValue);
+        }
+    }
+
+    function getMatrixValue( currentRow, currentCol)
+    {
+        var value = 0;
+        for(let i =0; i<m2.length; i++)
+        {
+            value = value + m1[currentRow][i] * m2[i][currentCol];
+        }
+        return value
+    }
+    return resultArr
 }
 
 
@@ -639,7 +660,35 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    //Check horizontals
+    for (var i = 0; i < position.length; i++) {
+        var horiz = '';
+        position[i].forEach(element => {
+            horiz+=element;
+        });
+        if(horiz == '000') return '0';
+        if(horiz == 'XXX') return 'X';
+    }
+
+    //Check verticals
+    for (var i = 0; i < position.length; i++) {
+        var vert = '';
+        for(var j=0; j < position.length; j++)
+        {
+            vert = vert + position[j][i];
+        }
+        if(vert == '000') return '0';
+        if(vert == 'XXX') return 'X';
+    }
+
+    //Check corners
+    var rightToLeft = position[0][0] + position[1][1] + position[2][2];
+    var leftToRight = position[0][2] + position[1][1] + position[2][0];
+    if(rightToLeft == '000' || leftToRight == '000' ) return '0';
+    if(rightToLeft == 'XXX' || leftToRight == 'XXX' ) return 'X';
+
+
+    return
 }
 
 
