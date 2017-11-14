@@ -82,7 +82,23 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    
+    function DFS(node)
+    {
+        if(node.visited) return
+        node.visited = true;
+        yield node.n
+        
+        if(node.children)
+        {
+            node.children.forEach(function(element) {
+                DFS(element);
+            });
+        }
+        else return
+
+    }
+    DFS(root);
 }
 
 

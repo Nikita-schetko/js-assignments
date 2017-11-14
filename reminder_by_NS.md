@@ -1,6 +1,6 @@
 #TO TEST
 - npm test
-- npm test ./test/01-strings-tests.js
+- npm test ./test/07-yield-tests.js
 
 
 
