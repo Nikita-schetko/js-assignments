@@ -82,23 +82,35 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    
-    function DFS(node)
-    {
-        if(node.visited) return
-        node.visited = true;
-        yield node.n
-        
-        if(node.children)
-        {
-            node.children.forEach(function(element) {
-                DFS(element);
-            });
+    var stack = [];
+    var yieldArr = [];
+    yield {n: root.n}
+    root.children.forEach(function (node) {
+        stack.push(node);
+    })
+    while (stack.length > 0) {
+        var currentNode = stack.shift();
+        // yieldArr.push(currentNode.n);
+        yield {n: currentNode.n}
+        if (currentNode.children) {
+            let reversedCurrentNodeChildrens = currentNode.children.reverse()
+            reversedCurrentNodeChildrens.forEach(function (node) {
+                stack.unshift(node);
+            })
         }
-        else return
-
     }
-    DFS(root);
+
+        // if(root.visited) return
+        // root.visited = true;
+        // yield {n: root.n}
+        
+        // if(root.children)
+        // {
+        //     root.children.forEach(function(element) {
+        //         depthTraversalTree(element);
+        //     });
+        // }
+        // else return
 }
 
 
