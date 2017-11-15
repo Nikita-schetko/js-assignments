@@ -81,37 +81,48 @@ function* getFibonacciSequence() {
  *  depthTraversalTree(node1) => node1, node2, node3, node4, node5, node6, node7, node8
  *
  */
+
 function* depthTraversalTree(root) {
     var stack = [];
-    var yieldArr = [];
-    yield {n: root.n}
-    root.children.forEach(function (node) {
-        stack.push(node);
-    })
-    while (stack.length > 0) {
-        var currentNode = stack.shift();
-        // yieldArr.push(currentNode.n);
-        yield {n: currentNode.n}
-        if (currentNode.children) {
-            let reversedCurrentNodeChildrens = currentNode.children.reverse()
-            reversedCurrentNodeChildrens.forEach(function (node) {
-                stack.unshift(node);
-            })
+    stack.push(root);
+    while(stack.length != 0)
+    {
+        root = stack.pop();
+        yield root;
+        if(root.children)
+        {
+            for(var i = root.children.length; i > 0; i--)
+            {
+                stack.push(root.children[i-1]);
+            }
         }
     }
-
-        // if(root.visited) return
-        // root.visited = true;
-        // yield {n: root.n}
-        
-        // if(root.children)
-        // {
-        //     root.children.forEach(function(element) {
-        //         depthTraversalTree(element);
-        //     });
-        // }
-        // else return
 }
+
+
+// function* depthTraversalTree(root) {
+//     var stack = [];
+//     var yieldArr = [];
+//     yield root
+//     // root.children.forEach(function (node) {
+//     //     stack.push(node);
+//     // })
+//     while (root.children.length > 0) 
+//     {
+//         stack.push(root.children.shift());
+//         while (stack.length > 0) {
+//             var currentNode = stack.shift();
+//             // yieldArr.push(currentNode.n);
+//             yield currentNode
+//             if (currentNode.children) {
+//                 let reversedCurrentNodeChildrens = currentNode.children.reverse()
+//                 reversedCurrentNodeChildrens.forEach(function (node) {
+//                     stack.unshift(node);
+//                 })
+//             }
+//         }
+//     }
+// }
 
 
 /**
