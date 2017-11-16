@@ -99,14 +99,12 @@ function* depthTraversalTree(root) {
     }
 }
 
+// Cant understand, why my implementation slower than implementation above 
 
 // function* depthTraversalTree(root) {
 //     var stack = [];
 //     var yieldArr = [];
 //     yield root
-//     // root.children.forEach(function (node) {
-//     //     stack.push(node);
-//     // })
 //     while (root.children.length > 0) 
 //     {
 //         stack.push(root.children.shift());
@@ -147,9 +145,40 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    var stack = [];
+    stack.push(root);
+    yield root;
+    while(stack.length != 0)
+    {
+        root = stack.pop();
+        if(root.children)
+        {
+            for(var i = root.children.length; i > 0; i--)
+            {
+                let len = root.children.length;
+                yield root.children[len-i];
+                stack.push(root.children[i-1]);
+            }
+        }
+    }
 }
 
+// function* breadthTraversalTree(root) {
+//     var stack = [];
+//     stack.push(root);
+//     while(stack.length != 0)
+//     {
+//         root = stack.shift();
+//         yield root;
+//         if(root.children)
+//         {
+//             for(var i = 0; i < root.children.length; i++)
+//             {
+//                 stack.push(root.children[i]);
+//             }
+//         }
+//     }
+// }
 
 /**
  * Merges two yield-style sorted sequences into the one sorted sequence.
