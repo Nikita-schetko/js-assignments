@@ -33,7 +33,29 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    // Not sure about best realization here :/
+    var bottles = 99;
+    var passBottle = false;
+    while(bottles > 1)
+    {
+        if(passBottle)
+        {
+         let bottlesWord = '';
+         passBottle = false;    
+         bottles--;
+         bottles > 1 ?  bottlesWord = ' bottles' : bottlesWord = ' bottle'; 
+         yield 'Take one down and pass it around, '+ bottles + bottlesWord + ' of beer on the wall.'  
+        }
+        else
+        {
+            passBottle = true;
+            yield bottles + ' bottles of beer on the wall, '+  bottles + ' bottles of beer.';
+        }
+    }
+        yield '1 bottle of beer on the wall, 1 bottle of beer.'
+        yield 'Take one down and pass it around, no more bottles of beer on the wall.'
+        yield 'No more bottles of beer on the wall, no more bottles of beer.'
+        yield 'Go to the store and buy some more, 99 bottles of beer on the wall.'
 }
 
 
@@ -47,7 +69,17 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+  var fibonacciPrevNum = 0;
+  var fiboncciNum = 1;
+  yield 0;
+  yield 1;
+  while(true)
+  {
+    let result = fibonacciPrevNum + fiboncciNum;
+    fibonacciPrevNum = fiboncciNum;
+    fiboncciNum = result;
+    yield result
+  }
 }
 
 
@@ -83,6 +115,7 @@ function* getFibonacciSequence() {
  */
 
 function* depthTraversalTree(root) {
+<<<<<<< HEAD
     var stack = [];
     stack.push(root);
     while(stack.length != 0)
@@ -97,6 +130,10 @@ function* depthTraversalTree(root) {
             }
         }
     }
+=======
+    throw new Error('Not implemented');
+    
+>>>>>>> refs/remotes/origin/master
 }
 
 // Cant understand, why my implementation slower than implementation above 
