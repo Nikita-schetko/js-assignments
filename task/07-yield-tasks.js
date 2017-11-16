@@ -52,31 +52,10 @@ function* get99BottlesOfBeer() {
             yield bottles + ' bottles of beer on the wall, '+  bottles + ' bottles of beer.';
         }
     }
-    while(bottles == 0 || bottles == 1)
-    {
-        if(bottles == 1 && passBottle == false) 
-        {
-            passBottle = true;
-            yield '1 bottle of beer on the wall, 1 bottle of beer.'
-        } 
-        if(bottles == 1 && passBottle == true)
-        {
-            passBottle = false;
-            bottles--;
-            yield 'Take one down and pass it around, no more bottles of beer on the wall.'
-        } 
-        if(bottles == 0 && passBottle == false) 
-        {
-            passBottle = true;
-            yield 'No more bottles of beer on the wall, no more bottles of beer.'
-        }     
-        if(bottles == 0 && passBottle == true) 
-        {
-            passBottle = false;
-            bottles--;
-            yield 'Go to the store and buy some more, 99 bottles of beer on the wall.'
-        }  
-    }
+        yield '1 bottle of beer on the wall, 1 bottle of beer.'
+        yield 'Take one down and pass it around, no more bottles of beer on the wall.'
+        yield 'No more bottles of beer on the wall, no more bottles of beer.'
+        yield 'Go to the store and buy some more, 99 bottles of beer on the wall.'
 }
 
 
@@ -92,12 +71,10 @@ function* get99BottlesOfBeer() {
 function* getFibonacciSequence() {
   var fibonacciPrevNum = 0;
   var fiboncciNum = 1;
-  var firstThreeFibonacci = 0;
   yield 0;
   yield 1;
   while(true)
   {
-
     let result = fibonacciPrevNum + fiboncciNum;
     fibonacciPrevNum = fiboncciNum;
     fiboncciNum = result;
