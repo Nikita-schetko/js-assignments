@@ -115,6 +115,7 @@ function* getFibonacciSequence() {
  */
 
 function* depthTraversalTree(root) {
+<<<<<<< HEAD
     var stack = [];
     stack.push(root);
     while(stack.length != 0)
@@ -129,6 +130,10 @@ function* depthTraversalTree(root) {
             }
         }
     }
+=======
+    throw new Error('Not implemented');
+    
+>>>>>>> refs/remotes/origin/master
 }
 
 // Cant understand, why my implementation slower than implementation above 
