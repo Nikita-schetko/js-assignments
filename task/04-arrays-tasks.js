@@ -354,6 +354,7 @@ function get3TopItems(arr) {
  *   [ -1, 0, 1 ] => 1
  *   [ 1, 2, 3]   => 3
  *   [ null, 1, 'elephant' ] => 1
+ *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
         var postiveArray = arr.filter(function(value){return value>0})
