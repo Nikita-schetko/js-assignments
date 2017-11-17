@@ -177,23 +177,74 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    var stack = [];
-    stack.push(root);
-    yield root;
-    while(stack.length != 0)
+    var queue = new Queue();
+    queue.enqueue(root);
+    while(queue.getLength() != 0)
     {
-        root = stack.pop();
+        root = queue.dequeue();
+        yield root
         if(root.children)
         {
-            for(var i = root.children.length; i > 0; i--)
+            for(var i = 0; i < root.children.length; i++)
             {
-                let len = root.children.length;
-                yield root.children[len-i];
-                stack.push(root.children[i-1]);
+                queue.enqueue(root.children[i]);
             }
         }
     }
 }
+
+function Queue(){
+      // initialise the queue and offset
+      var queue  = [];
+      var offset = 0;
+    
+      // Returns the length of the queue.
+      this.getLength = function(){
+        return (queue.length - offset);
+      }
+    
+      // Returns true if the queue is empty, and false otherwise.
+      this.isEmpty = function(){
+        return (queue.length == 0);
+      }
+    
+      /* Enqueues the specified item. The parameter is:
+       *
+       * item - the item to enqueue
+       */
+      this.enqueue = function(item){
+        queue.push(item);
+      }
+    
+      /* Dequeues an item and returns it. If the queue is empty, the value
+       * 'undefined' is returned.
+       */
+      this.dequeue = function(){
+    
+        // if the queue is empty, return immediately
+        if (queue.length == 0) return undefined;
+    
+        // store the item at the front of the queue
+        var item = queue[offset];
+    
+        // increment the offset and remove the free space if necessary
+        if (++ offset * 2 >= queue.length){
+          queue  = queue.slice(offset);
+          offset = 0;
+        }
+    
+        // return the dequeued item
+        return item;
+    
+      }
+    
+      /* Returns the item at the front of the queue (without dequeuing it). If the
+       * queue is empty then undefined is returned.
+       */
+      this.peek = function(){
+        return (queue.length > 0 ? queue[offset] : undefined);
+      }
+    }
 
 // function* breadthTraversalTree(root) {
 //     var stack = [];
@@ -226,7 +277,32 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    var resultArr = [];
+    var newIndex = 0;
+    var lastResult = 0;
+    var sourceA = source1();
+    var sourceB = source2();
+    while(true)
+    {
+        let currentNumberA = sourceA.next();
+        let currentNumberB = sourceB.next();
+        currentNumberA.done ? '' : resultArr.push(currentNumberA.value);
+        currentNumberB.done ? '' : resultArr.push(currentNumberB.value);
+        resultArr.sort(function (a, b) { return a - b });
+        if(newIndex == 0 && lastResult == 0)
+        {
+            lastResult = resultArr[0];
+            newIndex = 1;
+        }
+        else
+        {
+            newIndex = resultArr.lastIndexOf(lastResult) + 1;
+            if(resultArr[newIndex] && resultArr[newIndex])
+            lastResult =  resultArr[newIndex];
+        }
+        yield lastResult;
+    }
+
 }
 
 
