@@ -113,7 +113,7 @@ function fromJSON(proto, json) {
 const cssSelectorBuilder = {
 
     element: function(value) {
-        throw new Error('Not implemented');
+        return 
     },
 
     id: function(value) {
@@ -138,9 +138,41 @@ const cssSelectorBuilder = {
 
     combine: function(selector1, combinator, selector2) {
         throw new Error('Not implemented');
-    },
+    }
+
 };
 
+var module = (function(){
+    
+        var _private = {
+            i: 5,
+            get: function() {
+                console.log('Current value: ' + this.i);
+            },
+            set: function(val) {
+                this.i = val;
+            },
+            run: function() {
+                console.log('Running!');
+            },
+            jump: function() {
+                console.log('Jumping!')
+            }
+        };
+        
+        return {
+            facade: function(args) {
+                _private.set(args.val);
+                _private.get();
+                if (args.run) {
+                    _private.run();
+                }
+            }
+        };
+    
+    }());
+    
+    module.facade({run: true, val: 10}); 
 
 module.exports = {
     Rectangle: Rectangle,
