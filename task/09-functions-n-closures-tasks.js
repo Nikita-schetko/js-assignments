@@ -179,10 +179,36 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    throw new Error('Not implemented');
+    var funcName = func.name;
+    var result;
+    return function(...f)
+    {
+        var argz = []
+        for (var i = 0; i < arguments.length; i++)
+        {
+            argz.push(parseArg(arguments[i]));
+        }
+        logFunc(funcName +'('+ argz+') starts');
+        let retval = func(...f);
+        logFunc(funcName +'('+ argz+') ends');        
+        return retval
+    }
 }
 
-
+function parseArg(argument) {
+    var str = '';
+    if (typeof argument === 'string') return '"' + argument + '"';
+    if (argument instanceof Array) {
+        str += '[';
+        for (var i = 0; i < argument.length; i++) {
+            if (i > 0) str += ',';
+            str += parseArg(argument[i]);
+        }
+        str += ']'
+        return str;
+    }
+    else return argument.toString();
+}
 /**
  * Return the function with partial applied arguments
  *
@@ -197,7 +223,11 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+    //return (...f)=>[...arguments,...f].slice(1).join("");
+    return (...f)=>
+    {
+        return [...arguments,...f].slice(1).join("");
+    }
 }
 
 
@@ -218,7 +248,12 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+    var num = startFrom-1;
+    return function()
+    {
+        num++;
+        return num
+    }
 }
 
 
